@@ -1,0 +1,18 @@
+<h1 class=products__header>Detalle de producto</h1>
+
+<div class="detail__container" *ngFor="let detail of producto">
+    <h1 class="products__title">{{detail.name}}</h1>
+        <div class="products__link--detail">
+            
+                <img src="https://static.oysho.net/6/photos2{{detail.imagepath}}/{{detail.idMedia}}{{detail.set}}.jpg" alt={{detail.name}}>
+            
+        </div>
+        <div class="products__spect" *ngFor="let color of detail.color">  
+            <p>{{color.name}}</p>
+            <div >
+                <p>{{detail.size}}</p>
+            </div>
+        </div>
+        <p>{{detail.longDescription}}</p>
+        
+    </div>

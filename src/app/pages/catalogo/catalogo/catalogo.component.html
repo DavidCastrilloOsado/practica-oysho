@@ -1,0 +1,18 @@
+<h1 class=products__header>catálogo de productos</h1>
+<div class="products__container">
+    <div class="products__item" *ngFor="let list of productos">
+    <h1 class="products__title">{{list.name}}</h1>
+        <div class="products__link">
+            <a [routerLink]="['/detalle-producto', list.id]" >
+                <img appImgFallback src="https://static.oysho.net/6/photos2{{list.imagepath}}/{{list.idMedia}}{{list.set}}.jpg" alt={{list.name}} 
+                >
+            </a>
+        </div>
+        <div class="products__spect" *ngFor="let color of list.color">  
+            <p>{{color.name}}</p>
+            <div *ngFor="let size of color.sizes">
+                <p>{{size.name}}</p>
+            </div>
+        </div>
+    </div>
+</div>

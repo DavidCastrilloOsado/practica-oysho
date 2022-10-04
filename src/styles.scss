@@ -1,0 +1,52 @@
+@import './app/scss/normalice.scss';
+.products {
+    color: #333;
+    font-size: 60%;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    &__header {
+        text-align: center;
+        font-size: 3em;
+    }
+    &__container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    &__item {
+        max-width: 32%;
+        box-sizing: border-box;
+        padding: 1rem .75rem;
+    }
+
+    &__title {
+        font-size: 1.3em;
+        padding: 1rem .5rem;
+    }
+    &__link {
+        img {
+            max-width: 100%;
+            max-height: 31.25rem;
+        }
+        &--detail {
+            img {
+                max-height: 48.5rem;
+            }
+        }
+    }
+    &__spect {
+        display: flex;
+        justify-content: space-between;
+        max-width: 20em;
+    }
+}
+app-detalle-producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .detail {
+        &__container {
+            max-width: 50%;
+        }
+    }
+}
