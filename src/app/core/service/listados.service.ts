@@ -1,87 +1,63 @@
 import { Injectable } from '@angular/core';
-import {  map } from 'rxjs';
-import { Products, Color, Size } from '../../core/models/global-products';
+import { map } from 'rxjs';
+import { GLOBAL_URL } from '../../../environments/environment';
+import { Products, Size } from '../../core/models/global-products';
 import { PostsService } from '../../core/service/posts.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ListadosService {
-  listado: Products[] = [];
-  constructor(private _posservice: PostsService) { }
-  conexionlistado(id?:number){
-     
-    if (id) {
-     
-      this._posservice.getCharacters(id).pipe(
-        
-        map((data) => {
-           
-          this.pushDetails(data);
-            //console.log('castrillo', data);
-        })
-        ).subscribe();
-    }else {
-     
-
-        this._posservice.getCharacters().pipe(
-          map((data) => {
-            // console.log('castri', data);
-            data.map((elm:any)=>this.pushProduct(elm?.bundleProductSummaries));
-             console.log('castrillo', data);
-          })
-          ).subscribe();
-      }
-    //  console.log('listado', this.listado)
-      return this.listado;
-    }
-    pushProduct(data: any): void { 
-      if(data?.length) {
-        
-        let productElement: Products = {} as Products;
-        productElement.id = data[0].id;
-        productElement.name = data[0].name;
-        productElement.size = data[0].sizeSystem;
-        productElement.color= [];
-        productElement.color = data[0].detail?.colors.map((elm:any)=>{
-          return {'name': elm.name, 
-                  'id': elm.id, 
-                  'image': elm.image?.url,
-                  'sizes': elm.sizes
-                  .filter((elm:any)=>elm.visibilityValue === "SHOW")
-                  .map((elm:any)=>{return {'name': elm.name, 'price': elm.price};})
-        }});
-        productElement.reference = data[0].detail?.reference;
-        productElement.longDescription = data[0].detail?.longDescription;
-        productElement.imagepath = data[0].detail?.xmedia[0].path;
-        productElement.idMedia = data[0].detail?.xmedia[0].xmediaItems[0].medias[0].idMedia;
-        productElement.set = data[0].detail?.xmedia[0].xmediaItems[0].set;
-        this.listado.push(productElement);
-      }
-    }
-    pushDetails(data: any): void { 
-      if(data) {
-        
-        let productElement: Products = {} as Products;
-        productElement.id = data.id;
-        productElement.name = data.name;
-        productElement.size = data.sizeSystem;
-        productElement.color = [];
-        productElement.color = data.detail?.colors.map((elm:any)=>{
-          return {'name': elm.name, 
-                  'id': elm.id, 
-                  'image': elm.image?.url,
-                  'sizes': elm.sizes
-                  .filter((elm:any)=>elm.visibilityValue === "SHOW")
-                  .map((elm:any)=>{return {'name': elm.name, 'price': elm.price};})
-        }});
-        productElement.reference = data.detail?.reference;
-        productElement.longDescription = data.detail?.longDescription;
-        productElement.imagepath = data.detail?.xmedia[0].path;
-        productElement.idMedia = data.detail?.xmedia[0].xmediaItems[0].medias[0].idMedia;
-        productElement.set = data.detail?.xmedia[0].xmediaItems[0].set;
-        this.listado.push(productElement);
-      }
-    }
+  constructor(private _posservice: PostsService) {}
+  getDetails<Products>(id: number) {
+    return this._posservice.getCharacters(id).pipe(
+      map((data: any) => {
+        return this.pushProduct(data, false);
+      })
+    );
+  }
+  getAllProducts<Products>() {
+    return this._posservice.getCharacters().pipe(
+      map((data: any) => {
+        return data
+          .filter((elm: any) => elm.bundleProductSummaries.length)
+          .map((elm: any) => {
+            return this.pushProduct(elm?.bundleProductSummaries, true);
+          });
+      })
+    );
   }
 
+  pushProduct(data?: any, detail?: boolean): Products {
+    data = detail ? data[0] : data;
+    return {
+      id: data.id,
+      name: data.name,
+      size: data.sizeSystem,
+      color: data.detail?.colors.map((elm: Products) => {
+        return {
+          name: elm.name,
+          id: elm.id,
+          image: elm.image?.url,
+          sizes: elm
+            .sizes!.filter((elm: any) => elm.visibilityValue === 'SHOW')
+            .map((elm: Size) => {
+              return { name: elm.name, price: elm.price };
+            }),
+        };
+      }),
+      reference: data.detail?.reference,
+      longDescription: data.detail?.longDescription,
+      imagepath: data.detail?.xmedia[0].path,
+      idMedia: data.detail?.xmedia[0].xmediaItems[0].medias[0].idMedia,
+      set: data.detail?.xmedia[0].xmediaItems[0].set,
+      urlImg:
+        GLOBAL_URL.baseUrlImage +
+        data.detail?.xmedia[0].path +
+        '/' +
+        data.detail?.xmedia[0].xmediaItems[0].medias[0].idMedia +
+        data.detail?.xmedia[0].xmediaItems[0].set +
+        '.jpg',
+    };
+  }
+}

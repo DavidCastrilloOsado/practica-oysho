@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PostStylingDirective } from './directives/post-styling.directive';
 import { ImgFallbackDirective } from './directives/image-fix.directive';
+import { ProductsCompositionComponent } from './components/products-composition/products-composition.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
-    PostStylingDirective,
-    ImgFallbackDirective
+    ImgFallbackDirective,
+    ProductsCompositionComponent
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ImgFallbackDirective,
+    ProductsCompositionComponent,
+    RouterModule
   ]
 })
 export class SharedModule { }

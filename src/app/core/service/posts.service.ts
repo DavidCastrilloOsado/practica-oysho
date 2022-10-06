@@ -1,36 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map } from 'rxjs';
-let URLpost:string;
-const baseUrl:string = 'https://www.oysho.com/itxrest/2/catalog/store/64009600/60361121/category/1010466046/product?languageId=-5&appId=1';
+import { tap } from 'rxjs/operators';
+import { GLOBAL_URL } from '../../../environments/environment';
+const URL_APY: string = GLOBAL_URL.urlApy;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class PostsService {
-  constructor(private http: HttpClient) { }
-  
-  getCharacters(id?: number) {
-    let URLdetails:string = `https://www.oysho.com/itxrest/2/catalog/store/64009600/60361121/category/1010466046/product/${id}/detail?languageId=-5&appId=1`;
-    
-    // (id) ? URLpost = URLdetails : URLpost = baseUrl;
-    URLpost = id ? URLdetails : baseUrl
-    return this.http.get(URLpost).pipe(
-      map( (res: any) => {
-        if (!res) {
-          throw new Error('Value expected!');
-        } else {
-          // console.log('URL_apy', URLpost);
-          let results:any;
-          (id) ? results =  res : results =  res.products
+  constructor(private http: HttpClient) {}
 
-              //  console.log('servicio',results)
-          return  results;
-        }
-      }),
-      catchError(err => {
-        throw new Error(err.message);
+  getCharacters(id?: number) {
+    let urlDetails: string =
+      GLOBAL_URL.urlDetails + id + GLOBAL_URL.urlDetailsProduct;
+
+    let urlPost: string = id ? urlDetails : URL_APY;
+    return this.http.get(urlPost).pipe(
+      map((res: any) => {
+        let results: string;
+        results = (id) ? results = res  : results = res.products;
+        tap(
+          catchError((err) => {
+            throw new Error(err.message);
+          })
+        );
+        return results;
       })
     );
   }
