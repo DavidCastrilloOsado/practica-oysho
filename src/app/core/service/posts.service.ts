@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ProductsApy } from '../../core/models/products-apy';
 import { GLOBAL_URL } from '../../../environments/environment';
 const URL_APY: string = GLOBAL_URL.urlApy;
 
@@ -11,14 +12,15 @@ const URL_APY: string = GLOBAL_URL.urlApy;
 export class PostsService {
   constructor(private http: HttpClient) {}
 
-  getCharacters(id?: number) {
+  getCharacters(id?: number):Observable<ProductsApy> {
     let urlDetails: string =
       GLOBAL_URL.urlDetails + id + GLOBAL_URL.urlDetailsProduct;
 
     let urlPost: string = id ? urlDetails : URL_APY;
     return this.http.get(urlPost).pipe(
       map((res: any) => {
-        let results: string;
+        console.log('any',res)
+        let results:ProductsApy;
         results = id ? (results = res) : (results = res.products);
         tap(
           catchError((err) => {

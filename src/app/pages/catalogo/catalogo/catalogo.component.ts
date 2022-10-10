@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as _ from 'lodash';
 import { GLOBAL_URL } from '../../../../environments/environment';
 import { Products } from '../../../core/models/global-products';
 import { ListadosService } from '../../../core/service/listados.service';
@@ -14,7 +15,7 @@ export class CatalogoComponent implements OnInit {
   public products: Products[] = [];
   public filteredProducts: Products[] = [];
   public productsFilterColors: Products[] = [];
-  public getColorButtons: Products[] = [];
+  public getColorButtons: string[] = [];
   public isFilterColor: boolean = true;
   constructor(
     private _ListadosService: ListadosService,
@@ -23,16 +24,14 @@ export class CatalogoComponent implements OnInit {
 
   ngOnInit() {
     this.listado();
-    setTimeout(() => {
-      this.GetColorsButtons();
-    }, 2000);
   }
   listado() {
     this._ListadosService.getAllProducts().subscribe((data) => {
       this.products = data;
+      this.GetColorsButtons();
     });
   }
-  productOrder(arg: any) {
+  productOrder(arg: string): Array<Products> {
     if (this.isFilterColor) {
       this.filteredProducts = this._short.transform(
         this.products,
@@ -49,18 +48,26 @@ export class CatalogoComponent implements OnInit {
       return (this.productsFilterColors = this.filteredProducts);
     }
   }
-  colorOrder(color: string) {
+  colorOrder(color: string): Array<Products> {
     if (color === 'ALL-COLORS') {
-      return (this.isFilterColor = true);
+      this.returnAllColors();
+    } else {
+      this.productsFilterColors = this.products.filter(
+        (elm) => elm.productColor === color
+      );
+      this.isFilterColor = false;
+      console.log('fltroscolores', this.productsFilterColors);
     }
-    this.productsFilterColors = this.products.filter(
-      (elm) => elm.productColor === color
-    );
-    this.isFilterColor = false;
     return this.productsFilterColors;
   }
+  returnAllColors():boolean {
+    return (this.isFilterColor = true);
+  }
   GetColorsButtons() {
-    localStorage.setItem('PRODUCTS', JSON.stringify(this.products));
-    this.getColorButtons = JSON.parse(localStorage.getItem('PRODUCTS')!);
+    this.getColorButtons = _.uniq(
+      this.products
+        .map((color) => color.color.map((color) => color.name))
+        .flat(1)
+    );
   }
 }

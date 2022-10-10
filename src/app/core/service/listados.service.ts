@@ -1,34 +1,35 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { GLOBAL_URL } from '../../../environments/environment';
 import { Products, Size } from '../../core/models/global-products';
 import { PostsService } from '../../core/service/posts.service';
+import { ProductsApy } from '../models/products-apy';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListadosService {
   constructor(private _posservice: PostsService) {}
-  getDetails<Products>(id: number) {
+  getDetails(id: number):Observable<Products> {
     return this._posservice.getCharacters(id).pipe(
-      map((data: any) => {
+      map((data: ProductsApy) => {
         return this.pushProduct(data, false);
       })
     );
   }
-  getAllProducts<Products>() {
+  getAllProducts():Observable<Products[]> {
     return this._posservice.getCharacters().pipe(
       map((data: any) => {
         return data
-          .filter((elm: any) => elm.bundleProductSummaries.length)
-          .map((elm: any) => {
+          .filter((elm: ProductsApy) => elm.bundleProductSummaries!.length)
+          .map((elm: ProductsApy) => {
             return this.pushProduct(elm?.bundleProductSummaries, true);
           });
       })
     );
   }
 
-  pushProduct(data?: any, detail?: boolean): Products {
+  pushProduct(data: any, detail?: boolean): Products {
     data = detail ? data[0] : data;
     let elmPrice: number = 0;
     let elmColor: string = '';
@@ -45,7 +46,7 @@ export class ListadosService {
           id: elm.id,
           image: elm.image?.url,
           sizes: elm
-            .sizes!.filter((elm: any) => elm.visibilityValue === 'SHOW')
+            .sizes!.filter((elm: Size) => elm.visibilityValue === 'SHOW')
             .map((elm: Size) => {
               elmPrice = elm.price;
               return { name: elm.name, price: elm.price };

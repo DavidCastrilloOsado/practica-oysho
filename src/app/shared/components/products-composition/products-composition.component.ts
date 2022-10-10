@@ -15,4 +15,7 @@ export class ProductsCompositionComponent implements OnInit {
   
   constructor() {}
   ngOnInit(): void {}
+  formated (value:any):string {
+    return (parseInt(value)/100).toString().replace('.', ',');
+  }
 }

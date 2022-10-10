@@ -24,7 +24,7 @@ export class DetalleProductosComponent implements OnInit {
     });
   }
   productGet(id: number) {
-    return this._ListadosService
+    this._ListadosService
       .getDetails(id)
       .subscribe((det) => (this.product = [det]));
   }

@@ -6,10 +6,10 @@
         <div class="product__filter__items__colors">
             <div class="product__filter__items__colors__container">
                 <h3>Filtrar por colores</h3>
-                <button *ngIf="!isFilterColor" class="allColors" (click)="colorOrder ('ALL-COLORS')">Mostrar todos los
+                <button *ngIf="!isFilterColor" class="allColors" (click)="colorOrder('ALL-COLORS')">Mostrar todos los
                     colores</button>
-                <button class="{{color.productColor}}" *ngFor="let color of getColorButtons"
-                    (click)="colorOrder (color.productColor)">{{color.productColor}}</button>
+                <button class="{{color}}" *ngFor="let color of getColorButtons"
+                    (click)="colorOrder (color)">{{color}}</button>
             </div>
         </div>
         <app-products-composition *ngIf="isFilterColor" [urlBreackImage]="urlBreackImage" [detail]="false"
