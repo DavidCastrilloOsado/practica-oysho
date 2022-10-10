@@ -4,7 +4,7 @@ import {DetalleProductosComponent} from './detalle-producto/detalle-producto.com
 
 const routes: Routes = [
   {
-    path: '',pathMatch: `full`, component: DetalleProductosComponent
+    path: '', component: DetalleProductosComponent
   }
 ];
 

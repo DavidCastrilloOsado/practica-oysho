@@ -4,7 +4,7 @@ import { CatalogoComponent} from './catalogo/catalogo.component'
 
 const routes: Routes = [
   {
-    path: '',pathMatch: `full`, component: CatalogoComponent
+    path: '', component: CatalogoComponent
   }
 ];
 

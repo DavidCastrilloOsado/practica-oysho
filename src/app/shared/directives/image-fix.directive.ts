@@ -10,7 +10,6 @@ export class ImgFallbackDirective {
 
   @HostListener('error')
   loadFallbackOnError() {
-    console.log('eror');
     const element: HTMLImageElement = <HTMLImageElement>this.eRef.nativeElement;
     element.src = this.appImgFallback || 'https://via.placeholder.com/200';
   }

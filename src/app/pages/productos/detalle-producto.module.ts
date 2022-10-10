@@ -1,17 +1,11 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { DetalleProductosComponent } from '../productos/detalle-producto/detalle-producto.component';
 import { DetalleProductoRoutingModule } from './detalle-producto-routing.module';
-import { DetalleProductosComponent } from '../productos/detalle-producto/detalle-producto.component'
-import { BrowserModule } from '@angular/platform-browser';
-
 
 @NgModule({
-  declarations: [
-    DetalleProductosComponent
-  ],
-  imports: [
-    CommonModule,
-    DetalleProductoRoutingModule,
-  ]
+  declarations: [DetalleProductosComponent],
+  imports: [CommonModule, DetalleProductoRoutingModule, SharedModule],
 })
-export class DetalleProductoModule { }
+export class DetalleProductoModule {}

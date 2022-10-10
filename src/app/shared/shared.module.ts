@@ -1,23 +1,24 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ImgFallbackDirective } from './directives/image-fix.directive';
-import { ProductsCompositionComponent } from './components/products-composition/products-composition.component';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-
+import { ProductsCompositionComponent } from './components/products-composition/products-composition.component';
+import { ImgFallbackDirective } from './directives/image-fix.directive';
+import { FilterPricePipe } from './pipes/filter-price.pipe';
+import { UniquePipe } from './pipes/filter-unique.pipe';
 
 @NgModule({
   declarations: [
     ImgFallbackDirective,
-    ProductsCompositionComponent
+    ProductsCompositionComponent,
+    FilterPricePipe,
+    UniquePipe
   ],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule, RouterModule],
   exports: [
     ImgFallbackDirective,
     ProductsCompositionComponent,
-    RouterModule
-  ]
+    FilterPricePipe,
+    UniquePipe
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

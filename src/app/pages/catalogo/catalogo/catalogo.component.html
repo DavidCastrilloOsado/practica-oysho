@@ -1,17 +1,38 @@
 <h2 class=products__header>catálogo de productos</h2>
 <div class="products__container">
-    <div class="products__item" *ngFor="let product of products">
-    <h3 class="products__title">{{product.name}}</h3>
-        <div class="products__link">
-            <a [routerLink]="['/detalle-producto', product.id]" >
-                <img appImgFallback = "{{urlBreackImage}}" src="{{product.urlImg}}" alt={{product.name}}                >
-
-            </a>
+    <div class="product__filter">
+        <div class="product__filter__items"><button (click)="productOrder('asc')">Precio Ascendente</button><button
+                (click)="productOrder('desc')">Precio descendente</button></div>
+        <div class="product__filter__items__colors">
+            <div class="product__filter__items__colors__container">
+                <h3>Filtrar por colores</h3>
+                <button *ngIf="!isFilterColor" class="allColors" (click)="colorOrder ('ALL-COLORS')">Mostrar todos los
+                    colores</button>
+                <button class="{{color.productColor}}" *ngFor="let color of getColorButtons"
+                    (click)="colorOrder (color.productColor)">{{color.productColor}}</button>
+            </div>
         </div>
-        <div class="products__spect" *ngFor="let color of product.color">  
-            <p>{{color.name}}</p>
-            <div *ngFor="let size of color.sizes">
-                <p>{{size.name}}</p>
+        <app-products-composition *ngIf="isFilterColor" [urlBreackImage]="urlBreackImage" [detail]="false"
+            [products]="products">
+        </app-products-composition>
+
+        <div class="products__container" *ngIf="!isFilterColor">
+            <div class="products__item" *ngFor="let colorProduct of productsFilterColors">
+                <div class="products__link">
+                    <a [routerLink]="['/detalle-producto', colorProduct.id]">
+                        <img appImgFallback="{{urlBreackImage}}" src="{{colorProduct.urlImg}}"
+                            alt={{colorProduct.name}}>
+                    </a>
+                </div>
+                <div class="products__spect__container">
+                    <div class="products__spect" *ngFor="let color of colorProduct.color">
+                        <p>{{color.name}}</p>
+                        <div class="products__spect" *ngFor="let size of color.sizes">
+                            <p>{{size.name}}</p>
+                        </div>
+                    </div>
+                    <p><strong>{{colorProduct.price}}</strong></p>
+                </div>
             </div>
         </div>
     </div>

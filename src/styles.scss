@@ -1,12 +1,3 @@
-@import './app/styles/normalice.scss';
+@import './app/styles/index.scss';
 
-app-detalle-producto {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .detail {
-        &__container {
-            max-width: 50%;
-        }
-    }
-}
+

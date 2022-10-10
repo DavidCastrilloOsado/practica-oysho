@@ -30,11 +30,16 @@ export class ListadosService {
 
   pushProduct(data?: any, detail?: boolean): Products {
     data = detail ? data[0] : data;
+    let elmPrice: number = 0;
+    let elmColor: string = '';
+    let elmClass: string = '';
     return {
       id: data.id,
       name: data.name,
       size: data.sizeSystem,
+      class: elmClass,
       color: data.detail?.colors.map((elm: Products) => {
+        elmColor = elm.name;
         return {
           name: elm.name,
           id: elm.id,
@@ -42,10 +47,13 @@ export class ListadosService {
           sizes: elm
             .sizes!.filter((elm: any) => elm.visibilityValue === 'SHOW')
             .map((elm: Size) => {
+              elmPrice = elm.price;
               return { name: elm.name, price: elm.price };
             }),
         };
       }),
+      price: elmPrice,
+      productColor: elmColor,
       reference: data.detail?.reference,
       longDescription: data.detail?.longDescription,
       imagepath: data.detail?.xmedia[0].path,

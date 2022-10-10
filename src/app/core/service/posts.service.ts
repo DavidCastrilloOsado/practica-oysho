@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { GLOBAL_URL } from '../../../environments/environment';
@@ -19,7 +19,7 @@ export class PostsService {
     return this.http.get(urlPost).pipe(
       map((res: any) => {
         let results: string;
-        results = (id) ? results = res  : results = res.products;
+        results = id ? (results = res) : (results = res.products);
         tap(
           catchError((err) => {
             throw new Error(err.message);

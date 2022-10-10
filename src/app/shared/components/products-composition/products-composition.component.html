@@ -1,21 +1,39 @@
-<!-- <div *ngIf="detail ; else details" class="products__link">
-    <a [routerLink]="['/detalle-producto', product.id]">
-        <img appImgFallback="{{urlBreackImage}}" src="{{product.urlImg}}" alt={{product.name}}>
-
-    </a>
+<div *ngIf="!detail ; else details" class="products__container">
+    <div class="products__item" *ngFor="let product of products">
+        <div *ngIf="isFilterColor" [ngClass]="product.class" class="products__link">
+            <a [routerLink]="['/detalle-producto', product.id]">
+                <img appImgFallback="{{urlBreackImage}}" src="{{product.urlImg}}" alt={{product.name}}>
+            </a>
+        </div>
+        <div class="products__spect__container">
+            <div *ngFor="let color of product.color">
+                <div *ngIf="isFilterColor" class="products__spect">
+                    <p>{{color.name}}</p>
+                    <div class="products__spect__" *ngFor="let size of color.sizes">
+                        <p>{{size.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <p><strong>{{product.price}}</strong></p>
+        </div>
+    </div>
 </div>
+
 <ng-template #details>
     <div class="products__link">
         <a [routerLink]="['/catalogo']">
             <p class="return">volver</p>
-            <img appImgFallback="{{urlBreackImage}}" src="{{product.urlImg}}" alt={{product.name}}>
-    
+            <img appImgFallback="{{urlBreackImage}}" src="{{products[0].urlImg}}" alt={{products[0].name}}>
         </a>
     </div>
-</ng-template>
-<div class="products__spect" *ngFor="let color of product.color">
-    <p>{{color.name}}</p>
-    <div *ngFor="let size of color.sizes">
-        <p>{{size.name}}</p>
+    <div class="products__spect__container">
+        <div class="products__spect" *ngFor="let color of products[0].color">
+            <p>{{color.name}}</p>
+            <div *ngFor="let size of color.sizes">
+                <p>{{size.name}}</p>
+                <p>{{size.price}} </p>
+            </div>
+        </div>
+        <p>{{products[0].longDescription}}</p>
     </div>
-</div> -->
+</ng-template>

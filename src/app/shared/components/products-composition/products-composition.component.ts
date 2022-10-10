@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Products } from '../../../core/models/global-products';
 
 @Component({
@@ -9,16 +9,10 @@ import { Products } from '../../../core/models/global-products';
 export class ProductsCompositionComponent implements OnInit {
   @Input() urlBreackImage: string = '';
   @Input() detail: boolean = false;
-  @Input() product: Products[] = [
-    {
-      id: 0,
-      urlImg: '',
-      name: '',
-      color: [],
-    },
-  ];
+  @Input() isFilterColor: boolean = true;
+  @Input() position: number = 0;
+  @Input() products: Products[] = [];
+  
   constructor() {}
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

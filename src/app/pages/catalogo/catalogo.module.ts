@@ -1,19 +1,25 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// import {PostsService} from '../../core/service/posts.service';//
+import { NgModule } from '@angular/core';
+import { FilterPricePipe } from 'src/app/shared/pipes/filter-price.pipe';
+import { SharedModule } from '../../shared/shared.module';
 import { CatalogoRoutingModule } from './catalogo-routing.module';
 import { CatalogoComponent } from './catalogo/catalogo.component';
-import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     CatalogoComponent
+
   ],
   imports: [
     CommonModule,
     CatalogoRoutingModule,
     SharedModule
+
+  ],
+  providers: [
+    FilterPricePipe,
+
   ]
 })
 export class CatalogoModule { }
