@@ -1,39 +1,45 @@
-<div *ngIf="!detail ; else details" class="products__container">
-    <div class="products__item" *ngFor="let product of products">
-        <div *ngIf="isFilterColor" [ngClass]="product.class" class="products__link">
-            <a [routerLink]="['/detalle-producto', product.id]">
-                <img appImgFallback="{{urlBreackImage}}" src="{{product.urlImg}}" alt={{product.name}}>
+<div class="products__container">
+    <div class="products__item" *ngFor="let colorProduct of products">
+        <div class="products__link">
+            <a [routerLink]="detail ? ['/catalogue']:['/detail-pruduct', colorProduct.id]">
+                <img appImgFallback="{{urlBreackImage}}" src="{{colorProduct.urlImg}}" alt={{colorProduct.name}}>
+                <div class="products__link__add">
+                    <p class="products__link__add__text">Añadir</p>
+                    <div class="products__link__add__container">
+                        <div *ngFor="let color of colorProduct.color">
+                            <div class="products__link__add__item">
+                                <div class="products__link__add__color">
+                                    <ul *ngIf="color?.sizes?.length" class="products__link__add__color__sizes">
+                                        <li *ngFor="let size of color.sizes">
+                                            <p>
+                                                <span>{{size.name}}</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </a>
         </div>
         <div class="products__spect__container">
-            <div *ngFor="let color of product.color">
-                <div *ngIf="isFilterColor" class="products__spect">
-                    <p>{{color.name}}</p>
-                    <div class="products__spect__" *ngFor="let size of color.sizes">
-                        <p>{{size.name}}</p>
+            <div class="products__spect__name">
+                <p>{{colorProduct.name}}</p>
+            </div>
+            <div class="products__spect__price">
+                <p><strong>{{colorProduct.price |formatedPrice}}</strong></p>
+            </div>
+            <div class="products__spect__item">
+                <div *ngFor="let color of colorProduct.color">
+                    <div class="products__spect">
+                        <div class="{{color.name | removeSpaces}} products__spect__color">
+                            <p><span>{{color.name| titlecase}}</span></p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <p><strong>{{formated(product.price)}}</strong></p>
+            <p *ngIf="detail">{{colorProduct.longDescription}}</p>
         </div>
     </div>
 </div>
-
-<ng-template #details>
-    <div class="products__link">
-        <a [routerLink]="['/catalogo']">
-            <p class="return">volver</p>
-            <img appImgFallback="{{urlBreackImage}}" src="{{products[0].urlImg}}" alt={{products[0].name}}>
-        </a>
-    </div>
-    <div class="products__spect__container">
-        <div class="products__spect" *ngFor="let color of products[0].color">
-            <p>{{color.name}}</p>
-            <div *ngFor="let size of color.sizes">
-                <p>{{size.name}}</p>
-                <p>{{size.price}} </p>
-            </div>
-        </div>
-        <p>{{products[0].longDescription}}</p>
-    </div>
-</ng-template>

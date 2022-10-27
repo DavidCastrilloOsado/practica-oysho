@@ -1,0 +1,25 @@
+<div class="products__filter__items__colors">
+    <h2>
+        <button (click)="toggleClassFilters()">
+            <i class="icon-sliders"></i>Filtros
+        </button>
+    </h2>
+    <div [ngClass]="{
+      'products__filter__items__colors__modal--visible': visibleFilterColors
+    }" class="products__filter__items__colors__modal">
+        <div [ngClass]="{ animate__backInRight: visibleFilterColors }"
+            class="products__filter__items__colors__container">
+            <button class="products__filter__items__colors__close" (click)="toggleClassFilters()">
+                <i class="icon-cancel"></i>
+            </button>
+            <h3>Filtrar por color</h3>
+            <button *ngIf="isFilterColor" class="allColors" (click)="colorOrder('ALL-COLORS')">
+                Mostrar todos los colores
+            </button>
+            <button class="{{ color | removeSpaces }}" *ngFor="let color of getColorButtons"
+                (click)="colorOrder(color)">
+                {{ color | titlecase }}
+            </button>
+        </div>
+    </div>
+</div>

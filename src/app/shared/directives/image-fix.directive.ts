@@ -6,7 +6,7 @@ import { Directive, Input, ElementRef, HostListener } from '@angular/core';
 export class ImgFallbackDirective {
   @Input() appImgFallback: string | undefined;
 
-  constructor(private eRef: ElementRef) {}
+  constructor(private eRef: ElementRef) { }
 
   @HostListener('error')
   loadFallbackOnError() {

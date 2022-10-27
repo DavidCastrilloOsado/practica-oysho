@@ -1,0 +1,112 @@
+@import "../../../../styles/01-settings/colors.scss";
+@import "../../../../styles/02-tools/rem-sizes.scss";
+@import "../../../../styles/03-utiles/extend-class.scss";
+@import "../../../../styles/03-utiles/animations.scss";
+@import "../../../../styles/01-settings/global-var.scss";
+@import "../../../../styles/02-tools/breakpoints";
+
+.products {
+  &__filter {
+    min-width: 100%;
+
+    &__items {
+      &__colors {
+        cursor: pointer;
+
+        &__close {
+          width: max-content;
+          align-self: flex-start;
+          border: none;
+          background-color: transparent;
+          font-size: rem(18px);
+
+          &::before {
+            display: none !important;
+          }
+        }
+
+        h2 {
+          margin: 0;
+
+          button {
+            color: $BLANCO;
+            background-color: $NEGRO;
+            padding: rem(4px) rem(16px);
+            border-radius: rem(40px);
+            cursor: pointer;
+          }
+        }
+
+        &__modal {
+          position: relative;
+          height: 0;
+          width: 0;
+          overflow: hidden;
+
+          &--visible {
+            position: fixed;
+            overflow: visible;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 11;
+            display: flex;
+            justify-content: flex-end;
+            background-color: rgba($BLANCO, 0.6);
+            cursor: default;
+          }
+        }
+
+        &__container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          width: rem(370px);
+          transition: all 2s;
+          padding: rem(100px) rem(32px);
+          background-color: $BLANCO;
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+          -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
+
+          h3 {
+            width: 100%;
+            font-size: rem(20px);
+          }
+
+          button {
+            @extend %buton-color;
+            margin-bottom: 0.5rem;
+            background-color: $BLANCO;
+            border: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            text-align: left;
+            padding: 0;
+            margin: rem(8px);
+            width: 43%;
+            box-sizing: border-box;
+            cursor: pointer;
+
+            &:last-of-type {
+              margin-bottom: 0;
+            }
+
+            &.allColors {
+              font-weight: bold;
+              width: 100%;
+              margin-bottom: rem(16px);
+
+              &::before {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

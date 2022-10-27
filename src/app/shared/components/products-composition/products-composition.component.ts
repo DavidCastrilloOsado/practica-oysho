@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Products } from '../../../core/models/global-products';
+import { Products } from '../../../core/models/global-products.models';
 
 @Component({
   selector: 'app-products-composition',
@@ -9,13 +9,8 @@ import { Products } from '../../../core/models/global-products';
 export class ProductsCompositionComponent implements OnInit {
   @Input() urlBreackImage: string = '';
   @Input() detail: boolean = false;
-  @Input() isFilterColor: boolean = true;
-  @Input() position: number = 0;
   @Input() products: Products[] = [];
-  
-  constructor() {}
-  ngOnInit(): void {}
-  formated (value:any):string {
-    return (parseInt(value)/100).toString().replace('.', ',');
-  }
+
+  constructor() { }
+  ngOnInit(): void { }
 }

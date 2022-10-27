@@ -1,0 +1,9 @@
+@import '../styles/02-tools/breakpoints';
+@import '../styles/02-tools/rem-sizes.scss';
+
+.wrapper {
+    @include mq-desktop {
+        max-width: rem(1920px);
+        margin: auto;
+    }
+}

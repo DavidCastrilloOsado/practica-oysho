@@ -3,29 +3,29 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: `catalogo`,
+    path: `catalogue`,
     loadChildren: () =>
-      import(`./pages/catalogo/catalogo.module`).then((m) => m.CatalogoModule),
+      import(`./pages/catalogue/catalogue.module`).then((m) => m.catalogueModule),
   },
   {
-    path: `detalle-producto/:id`,
+    path: `detail-pruduct/:id`,
     loadChildren: () =>
-      import(`./pages/productos/detalle-producto.module`).then(
-        (m) => m.DetalleProductoModule
+      import(`./pages/products/detail-pruduct.module`).then(
+        (m) => m.DetailProductModule
       ),
   },
   {
     path: ``,
-    redirectTo: `catalogo/`,
+    redirectTo: `catalogue/`,
     pathMatch: `full`,
   },
   {
     path: `**`,
-    redirectTo: `catalogo`,
+    redirectTo: `catalogue`,
   },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

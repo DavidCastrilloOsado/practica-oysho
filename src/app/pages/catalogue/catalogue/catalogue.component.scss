@@ -1,0 +1,132 @@
+@import '../../../../styles/01-settings/colors.scss';
+@import '../../../../styles/01-settings/global-var.scss';
+@import '../../../../styles/02-tools/rem-sizes.scss';
+@import '../../../../styles/03-utiles/extend-class.scss';
+@import '../../../../styles/03-utiles/animations.scss';
+@import '../../../../styles/01-settings/global-var.scss';
+@import '../../../../styles/02-tools/breakpoints';
+
+.products {
+
+  &__header {
+    text-align: center;
+    font-size: 3em;
+  }
+
+  &__container {
+    color: #333;
+    font-family: var(--font-main, 'Roboto');
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-width: 100%;
+    padding: rem(1px) rem(2px);
+  }
+
+  &__filter {
+    min-width: 100%;
+
+    &__items {
+      &__container {
+        min-width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+
+        @include mq-desktop {
+          min-height: rem(130px);
+        }
+      }
+
+      &__price {
+        display: flex;
+        flex-direction: column;
+        margin-right: rem(32px);
+
+        button {
+          font-weight: normal;
+          font-size: rem(18px);
+          background-color: $BLANCO;
+          width: 100%;
+          padding: rem(8px) rem(16px);
+          cursor: pointer;
+
+          &:not(.products__filter__items__price__slide) {
+            border: none;
+            border-bottom-left-radius: rem(20px);
+            border-bottom-right-radius: rem(20px);
+
+          }
+        }
+
+        &__slide {
+          display: flex;
+          justify-content: space-around;
+          border: solid rem(1px) var(--color-primary-super-light);
+          border-radius: rem(40px);
+          transition: all .5s;
+
+          &:hover {
+            color: var(--color-primary-light);
+          }
+        }
+
+        &__buttons {
+          height: 0;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+
+          &--visible {
+            position: relative;
+            border: solid rem(1px) var(--color-primary-super-light);
+            border-top: 0;
+            overflow: visible;
+            border-bottom-left-radius: rem(20px);
+            border-bottom-right-radius: rem(20px);
+            padding: rem(8px) 0;
+            height: auto;
+            animation-name: fadein;
+            -webkit-animation-duration: 1.5s;
+            animation-duration: 1.5s;
+            -webkit-animation-duration: 1.5s;
+            animation-duration: 1.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+
+            &::after,
+            &::before {
+              content: '';
+              display: block;
+              width: rem(1px);
+              height: rem(20px);
+              background-color: var(--color-primary-super-light);
+              position: absolute;
+              top: rem(-20px);
+            }
+
+            &::after {
+              right: rem(-1px);
+            }
+
+            &::before {
+              left: rem(-1px);
+            }
+
+          }
+        }
+
+        h2 {
+          margin: 0;
+        }
+      }
+
+    }
+  }
+
+}
+
+.animate__backInRight {
+  -webkit-animation-name: backInRight;
+  animation-name: backInRight;
+}

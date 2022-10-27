@@ -1,0 +1,55 @@
+@import "../01-settings/colors.scss";
+
+%buton-color {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 1px solid $NEGRO;
+    margin-right: 0.5rem;
+  }
+}
+
+%label-area {
+  position: relative;
+
+  span {
+    display: none;
+    width: min-content;
+    background-color: white;
+    white-space: nowrap;
+    position: absolute;
+    left: calc(100% - 25px);
+    transform: translateX(-50%);
+    bottom: 38px;
+    z-index: 10;
+    padding: 0.3rem 0.5rem;
+    box-shadow: -12px 0px 30px rgb(0 0 0 / 29%);
+
+    &:before {
+      content: "";
+      border: 8px solid #ffffff;
+      border-left-color: transparent;
+      border-right-color: transparent;
+      border-bottom-color: transparent;
+      position: absolute;
+      bottom: -16px;
+      left: calc(50% - 8px);
+    }
+  }
+
+  &:hover {
+    span {
+      display: block;
+      -webkit-animation: fadein 1s ease-in;
+      -moz-animation: fadein 1s ease-in;
+      animation: fadein 1s ease-in;
+    }
+  }
+}

@@ -1,0 +1,27 @@
+<h2 class="products__header">catálogo de products</h2>
+<div class="products__container">
+  <div class="products__filter">
+    <div class="products__filter__items__container">
+      <div class="products__filter__items__price">
+        <h2>
+          <button (click)="toggleClassPrice()" class="products__filter__items__price__slide">
+            Ordenar por <i class="icon-angle-down"></i>
+          </button>
+        </h2>
+        <div [ngClass]="{
+            'products__filter__items__price__buttons--visible':
+              visibleFilterPrice
+          }" class="products__filter__items__price__buttons">
+          <button (click)="priceProductOrder('asc')">Precio Ascendente</button>
+          <button (click)="priceProductOrder('desc')">
+            Precio descendente
+          </button>
+        </div>
+      </div>
+      <app-buttons-filer-colors (emitProducts)="setProducts($event)">
+      </app-buttons-filer-colors>
+    </div>
+    <app-products-composition [urlBreackImage]="urlBreackImage" [detail]="false" [products]="productsList">
+    </app-products-composition>
+  </div>
+</div>
