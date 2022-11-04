@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { ButtonsFilerColorsComponent } from './components/buttons-filer-colors/buttons-filer-colors.component';
 import { ProductsCompositionComponent } from './components/products-composition/products-composition.component';
 import { ImgFallbackDirective } from './directives/image-fix.directive';
-import { TransformDataToProductsComponent } from './helpers/transform-data-to-products/transform-data-to-products.component';
 import { FilterPricePipe } from './pipes/filter-price.pipe';
 import { FormatedPricePipe } from './pipes/formated-price.pipe';
 import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
@@ -16,7 +15,6 @@ import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
     FilterPricePipe,
     FormatedPricePipe,
     RemoveSpacesPipe,
-    TransformDataToProductsComponent,
     ButtonsFilerColorsComponent
   ],
   imports: [CommonModule, RouterModule],
@@ -26,7 +24,6 @@ import { RemoveSpacesPipe } from './pipes/remove-spaces.pipe';
     FilterPricePipe,
     FormatedPricePipe,
     RemoveSpacesPipe,
-    TransformDataToProductsComponent,
     ButtonsFilerColorsComponent,
   ],
 })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { TransformDataToProductsComponent } from 'src/app/shared/helpers/transform-data-to-products/transform-data-to-products.component';
+import { TransformDataToProductsHelper } from  '../../shared/helpers/transform-data-to-products/transform-data-to-products.component';
 import { Products } from '../models/global-products.models';
 import { ProductsApy } from '../models/products-apy.models';
 import { PostService } from './posts.service';
@@ -10,13 +10,12 @@ import { PostService } from './posts.service';
 })
 export class ListService {
   constructor(
-    private _postservice: PostService,
-    private _transformDataToProduct: TransformDataToProductsComponent
+    private _postservice: PostService
   ) { }
   getDetails(id: number): Observable<Products> {
     return this._postservice.getProductsDetails(id).pipe(
       map((data: ProductsApy) => {
-        return this._transformDataToProduct.TransformDataToProducts(data);
+        return TransformDataToProductsHelper.transformDataToProducts(data);
       })
     );
   }
@@ -26,7 +25,7 @@ export class ListService {
         return data
           .filter((elm: ProductsApy) => elm.bundleProductSummaries.length)
           .map((elm: ProductsApy) => {
-            return this._transformDataToProduct.TransformDataToProducts(
+            return TransformDataToProductsHelper.transformDataToProducts(
               elm?.bundleProductSummaries[0]
             );
           });

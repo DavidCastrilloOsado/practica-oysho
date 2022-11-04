@@ -184,21 +184,18 @@ describe('FilterPricePipe', () => {
   afterEach(() => {
     pipe = new FilterPricePipe();
   });
-  it('create an instance', () => {
-    expect(pipe).toBeTruthy();
-  });
   it('order array product to asc mode', () => {
     const newArrayaproducts = pipe.transform(products, 'asc', 'price');
     const pricesnewArrayaproducts = newArrayaproducts.map(data => data.price);
-    expect(pricesnewArrayaproducts).toBe([1999, 2299, 2599]);
+    expect(pricesnewArrayaproducts).toStrictEqual([1999, 2299, 2599]);
   });
   it('order array product to desc mode', () => {
     const newArrayaproducts = pipe.transform(products, 'desc', 'price');
     const pricesnewArrayaproducts = newArrayaproducts.map(data => data.price);
-    expect(pricesnewArrayaproducts).toBe([2599, 2299, 1999]);
+    expect(pricesnewArrayaproducts).toStrictEqual([2599, 2299, 1999]);
   });
   it('return value incorrect param asociation', () => {
-    const newArrayaproducts = pipe.transform(products, 'incorrect', 'price');
-    expect(newArrayaproducts).toBe(products);
+    const newArrayaproducts = pipe.transform(products, 'error', 'price');
+    expect(newArrayaproducts).not.toBe(priceProducts);
   });
 });

@@ -38,8 +38,8 @@ export class CatalogueComponent implements OnInit {
     } else {
       let filteredProducts = this._short.transform(
         this.productsList,
-        arg,
-        'price'
+        arg, 'price'
+      
       );
       this.toggleClassPrice();
       return (this.productsList = filteredProducts);

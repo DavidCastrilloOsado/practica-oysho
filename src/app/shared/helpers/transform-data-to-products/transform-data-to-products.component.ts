@@ -1,20 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { Products } from 'src/app/core/models/global-products.models';
 import { ColorApy, ProductsApy, SizeApy } from 'src/app/core/models/products-apy.models';
-import { GLOBAL_URL } from 'src/environments/environment';
+import { GLOBAL_URL } from '../../../../environments/environment';
 
-@Component({
-  selector: 'app-transform-data-to-products',
-  templateUrl: './transform-data-to-products.component.html',
-  styleUrls: ['./transform-data-to-products.component.scss']
-})
-export class TransformDataToProductsComponent implements OnInit {
 
-  constructor() { }
+export class TransformDataToProductsHelper  {
 
-  ngOnInit(): void {
-  }
-  TransformDataToProducts(data: ProductsApy): Products {
+  
+
+  
+  static transformDataToProducts(data: ProductsApy): Products {
     let elmPrice: number = 0;
     let elmColor: string = '';
     let elmClass: string = '';
